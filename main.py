@@ -1,9 +1,6 @@
 """
-Some mickmath stuff
-
-If you want to use with another dict:
-change path line 25
-check the "parsing words" part (line 27)
+personal project that make no sense.
+trying to genereate random name by analysis sequence of letter in a lot of name
 """
 
 #IMPORT
@@ -91,14 +88,13 @@ def generateARandomName(finalData, size):
 	currentletter = random.choice('qwertyuiopasdfghjklzxcvbnm');
 	retWord = currentletter;
 	for i in xrange(size):
-		print finalData[currentletter];
 		rand = randint(10, 1000); #IMPRESSISION PSQ J"AI LA FLEM, mettre le nombre max a la normalisation
 		for key, value in finalData[currentletter].iteritems():
 			if (rand < value):
 				retWord+= key
 				currentletter = key;
 				break;
-	print retWord;
+	print '\t', retWord;
 
 
 
@@ -107,5 +103,19 @@ def generateARandomName(finalData, size):
 #      Main         #
 #####################
 
-words = getByRegion(readAndParseFile('Prenoms.txt'), 'french'); #word structure [name, type(f/m), region, frequency]
-generateARandomName(addThem(normalize(getData(words))), 8);
+data = readAndParseFile('Prenoms.txt');
+print 'french'
+words = getByRegion(data, 'french'); #word structure [name, type(f/m), region, frequency]
+generateARandomName(addThem(normalize(getData(words))), randint(4,9));
+print 'spanish'
+words = getByRegion(data, 'spanish'); #word structure [name, type(f/m), region, frequency]
+generateARandomName(addThem(normalize(getData(words))), randint(4,9));
+print 'any'
+words = getByRegion(data, 'any'); #word structure [name, type(f/m), region, frequency]
+generateARandomName(addThem(normalize(getData(words))), randint(4,9));
+print 'english'
+words = getByRegion(data, 'english'); #word structure [name, type(f/m), region, frequency]
+generateARandomName(addThem(normalize(getData(words))), randint(4,9));
+print 'arabic'
+words = getByRegion(data, 'arabic'); #word structure [name, type(f/m), region, frequency]
+generateARandomName(addThem(normalize(getData(words))), randint(4,9));
