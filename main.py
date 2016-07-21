@@ -107,47 +107,5 @@ def generateARandomName(finalData, size):
 #      Main         #
 #####################
 
-#start = int(input("Quelle annee voulez vous commencer le test : "))
-#end   = int(input("Quelle annee voulez vous terminer le test : "))
-
 words = getByRegion(readAndParseFile('Prenoms.txt'), 'french'); #word structure [name, type(f/m), region, frequency]
-timeBegin = time.time()
-
 generateARandomName(addThem(normalize(getData(words))), 8);
-
-"""
-
-#parsing words
-evalList = []
-for word in words:
-	word = word[0:-1]
-	_word = unicode(word, 'utf-8')
-	_word = unicodedata.normalize('NFD', _word).encode('ascii', 'ignore')
-	evalList.append((word, evalWord(_word)))
-
-#init
-total = 0
-max = (0, -1) #(year, number of words found in this year)
-nbrOfYearWithResult = 0
-
-#seach in evalList
-for year in xrange(start, end + 1):
-	count = 0
-	to_print=[]
-	for tuple in evalList:
-		if tuple[1] == year:
-			to_print.append(str(tuple[0]));
-			count +=1
-	if count > 0:
-		print "\n", year, ",", count, "words found:"
-		printL(to_print)
-		total += count
-		nbrOfYearWithResult += 1
-		if count > max[1]:
-			max = (year,count)
-
-#final result on stdout
-print "\n", total, "words found between", start, "and", end
-print nbrOfYearWithResult, "years have their words"
-print max[0], "is the winner year with", max[1], "words !"
-rint "time : ", time.time() - timeBegin, "s" """
