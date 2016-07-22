@@ -38,7 +38,7 @@ def getByRegion(words, region):
 	if (region == 'any'):
 		return words
 	for word in words:
-		if (word[2] == region):
+		if (word[2] in region):
 			ret.append(word)
 	return ret;
 
@@ -84,9 +84,12 @@ def addThem(normalizedData):
 				prev = normalizedData[mainLetter][nextOne[0]]
 	return normalizedData
 
-def generateARandomName(finalData, size):
-	currentletter = random.choice('qwertyuiopasdfghjklzxcvbnm');
-	retWord = currentletter;
+def generateARandomName(finalData, size, startString):
+	retWord = startString
+	if (not startString[-1:]):
+		retWord = random.choice('qwertyuiopasdfghjklzxcvbnm');
+	currentletter = retWord[-1:]
+	
 	for i in xrange(size):
 		rand = randint(10, 1000); #IMPRESSISION PSQ J"AI LA FLEM, mettre le nombre max a la normalisation
 		for key, value in finalData[currentletter].iteritems():
@@ -103,19 +106,11 @@ def generateARandomName(finalData, size):
 #      Main         #
 #####################
 
+numOfGen = 10
+regions = ['french', 'spanish', 'any', 'english', 'arabic']
 data = readAndParseFile('Prenoms.txt');
-print 'french'
-words = getByRegion(data, 'french'); #word structure [name, type(f/m), region, frequency]
-generateARandomName(addThem(normalize(getData(words))), randint(4,9));
-print 'spanish'
-words = getByRegion(data, 'spanish'); #word structure [name, type(f/m), region, frequency]
-generateARandomName(addThem(normalize(getData(words))), randint(4,9));
-print 'any'
-words = getByRegion(data, 'any'); #word structure [name, type(f/m), region, frequency]
-generateARandomName(addThem(normalize(getData(words))), randint(4,9));
-print 'english'
-words = getByRegion(data, 'english'); #word structure [name, type(f/m), region, frequency]
-generateARandomName(addThem(normalize(getData(words))), randint(4,9));
-print 'arabic'
-words = getByRegion(data, 'arabic'); #word structure [name, type(f/m), region, frequency]
-generateARandomName(addThem(normalize(getData(words))), randint(4,9));
+for region in regions:
+	print region
+	words = getByRegion(data, region); #word structure [name, type(f/m), region, frequency]
+	for i in xrange(numOfGen):
+		generateARandomName(addThem(normalize(getData(words))), randint(3,6), '');
